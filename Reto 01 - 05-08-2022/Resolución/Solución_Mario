@@ -1,0 +1,179 @@
+/// @description Dada una matriz de números enteros indexados a 0, hacer una función que: 
+/*
+- Devuelva verdadero si la lista estrictamente creciente, después de eliminar como máximo un elemento de la lista
+- Falso en caso contrario
+Recordamos que una sucesión de números es estrictamente creciente si
+nums[i - 1] < nums[i]
+
+para 1 <= i < nums.length
+
+Ejemplo 1 
+Entrada: [1,2,10,5,7]
+Salida: verdadero
+
+Explicación: al eliminar 10 en el índice 2 de nums, se convierte en [1,2,5,7]
+
+ Ejemplo 2
+Entrada: [2,3,1,2]
+Salida: falso
+
+[3,1,2] es el resultado de eliminar el elemento en el índice 0.
+[2,1,2] es el resultado de eliminar el elemento en el índice 1.
+[2,3,2] es el resultado de eliminar el elemento en el índice 2.
+[2,3,1] es el resultado de eliminar el elemento en el índice 3.
+Ninguna matriz resultante es estrictamente creciente, por lo que el resultado es falso
+*/
+
+//Imagino que he el usuario ha introducido la siguiente matriz
+//nums=[ 0, 1, 2, 3, 4, 5 ];
+
+//Variables necesarias
+nums=-1;
+nums[0]=0;
+matriz_creciente=true;
+cantidad_fallos=0;
+posicion_posible_fallo=0; 
+posicion_fallo=0;
+total_entradas=0;
+//Datos aportados por el usuario
+total_entradas=get_integer("Dime el número de entradas de la lista/matriz:",2);
+if total_entradas>1
+	{	
+	for (i=0; i<total_entradas; i+=1)
+		{
+		nums[i]=get_integer("Entrada número " + string(i),i);
+		}	
+	}
+if total_entradas<2 
+	{
+	total_entradas=2;
+	show_message("Tienes que introducir mínimo dos valores. Añado dos al azar por no modificar el código mucho...");
+	nums[0]=0;
+	nums[1]=1;
+	exit;
+	}
+
+//Funciones		
+function scr_posibles_fallos (matriz)
+	{
+	total_entradas=array_length(matriz);
+	for (i=0; i<total_entradas; i+=1) //
+		{
+		if i==0 and matriz[i + 1] < matriz[i] 
+			{
+			posicion_posible_fallo=i;
+			cantidad_fallos+=1;
+			//Analizo si el fallo es de la posición actual o de la siguiente
+			}
+		if i>0 and i<(total_entradas) and matriz[i - 1] >= matriz[i] 
+			{
+			if cantidad_fallos==0 {posicion_posible_fallo=i;}
+			cantidad_fallos+=1;
+			if i==1 and cantidad_fallos==2
+				{cantidad_fallos-=1;}
+			}
+		}
+	/*if matriz!=nums and cantidad_fallos==0 {show_message(@"Análisis realizado:
+- Sin fallos");}
+	if matriz!=nums and cantidad_fallos>1 {show_message(@"Análisis realizado
+- Hay algún error en el análisis");}*/
+	}
+	
+function scr_mensaje_correccion()
+	{
+	//total_entradas=string_length(nums)
+	total_entradas=array_length(nums);
+	var pos=posicion_fallo;
+	var matriz_mensaje="["; //Para escribir la matriz como parte del mensaje
+	for (i=0; i<total_entradas; i+=1)
+		{
+		if i!=pos {matriz_mensaje+= string(nums[i]) + ",";}
+		if i==total_entradas-1
+			{
+			matriz_mensaje+= "]";
+			matriz_mensaje=string_replace(matriz_mensaje,",]","]");
+			}
+		}
+	show_message(@"Esta matriz sería estrictamente creciente; si
+	eliminásemos " + string(nums[pos]) + " en el índice " + string(pos) + " de nums, porque se convertiría en " + matriz_mensaje);
+	}
+
+function scr_matriz_prueba_1()
+	{
+	//Usando array_delete()	--- Me da un error esta función. Reportaré un caso...
+	}
+function scr_matriz_prueba_2(fallo)
+	{
+	//Usando una nueva matriz
+	matriz_prueba[0]=0;
+	total_entradas=array_length(nums);
+	var pos=fallo;
+	var a=0;
+	for (i=0; i<total_entradas; i+=1)
+		{
+		if i!=pos
+			{
+			matriz_prueba[a]=nums[i];
+			a+=1;
+			}
+		}
+	}
+
+//Programa principal
+scr_posibles_fallos(nums);
+//show_message("Posibles fallos " + string(cantidad_fallos)+ " Posición posible " + string(posicion_posible_fallo));
+if cantidad_fallos>1 {cantidad_fallos=2;}
+switch (cantidad_fallos)
+	{
+	case 0: //Sin errores
+		{
+		matriz_creciente=true;
+		show_message("Esta matriz es estrictamente creciente");
+		nums=-1; 
+		break;
+		}
+	case 1: //Un error chiquitito
+		{
+		matriz_creciente=true;
+		if total_entradas==2 
+			{
+			show_message("Hay un error. Analiza qué dato de los dos quieres quitar.");
+			nums=-1;
+			break;
+			}
+		if total_entradas>2 //Aquí recae la intringulis del problema
+			{
+			posicion_fallo=posicion_posible_fallo;
+			cantidad_fallos=0;
+			scr_matriz_prueba_2(posicion_fallo);
+			scr_posibles_fallos(matriz_prueba);
+			if cantidad_fallos==0 {scr_mensaje_correccion(); exit;}
+			if cantidad_fallos>0 and posicion_posible_fallo<total_entradas
+				{
+				cantidad_fallos=0;
+				posicion_fallo=posicion_posible_fallo+1;
+				scr_matriz_prueba_2(posicion_fallo);
+				scr_posibles_fallos(matriz_prueba);
+				if cantidad_fallos==0 {scr_mensaje_correccion(); exit;}
+				}
+			if cantidad_fallos>0 and posicion_posible_fallo>0
+				{
+				cantidad_fallos=0;
+				posicion_fallo=posicion_posible_fallo-1;
+				scr_matriz_prueba_2(posicion_fallo);
+				scr_posibles_fallos(matriz_prueba);
+				if cantidad_fallos==0 {scr_mensaje_correccion(); exit;}
+				}
+			if cantidad_fallos>0 {show_message("Me da que esta matriz no es estrictamente creciente");}
+			matriz_prueba=-1; //Borro esta matriz
+			nums=-1;
+			break;
+			}
+		}
+	case 2: //Matriz creciente - Caca de vaca
+		{
+		matriz_creciente=false;
+		show_message("Me da que esta matriz no es estrictamente creciente"); 	
+		break;
+		}
+	}
