@@ -1,0 +1,14 @@
+﻿<Window x:Class="$safeprojectname$.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:$safeprojectname$"
+        mc:Ignorable="d"
+        Title="Reto de la matriz creciente" Height="450" Width="800">
+    <Grid>
+        <Button Content="Analizar si la matriz introducida en el cuadro de texto es creciente" HorizontalAlignment="Left" Margin="46,238,0,0" VerticalAlignment="Top" Width="649" Height="76" Click="Button_Click" FontSize="16" FontFamily="Verdana"/>
+        <TextBox x:Name="Caja_texto" HorizontalAlignment="Left" Height="51" Margin="148,150,0,0" TextWrapping="Wrap" Text="1,2,3,4,5,6" VerticalAlignment="Top" Width="454" TextChanged="TextBox_TextChanged" FontSize="20" FontFamily="Verdana" MaxLength="10" MaxLines="1" IsUndoEnabled="True" AutoWordSelection="False" BorderBrush="#FF294EBD"/>
+
+    </Grid>
+</Window>
