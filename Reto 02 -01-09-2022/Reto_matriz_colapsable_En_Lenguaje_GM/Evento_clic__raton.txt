@@ -1,0 +1,53 @@
+/// @description Reto Colapsable
+
+//Datos de entrada del usuario y variables
+colapsable=true;
+ceros=false;
+impar="";
+num_binario="";
+num_binario=get_string("Indique el número en binario que quiere analizar:","01");
+var a="";
+a=num_binario;
+if 0==real(a) {ceros=true;}
+var b=0;
+b=scr_bin_a_decimal(a);
+num_decimal=0;
+num_decimal=b;
+impar=string_delete(a,1,(string_length(a)-1));
+//if impar=="0" {show_message("Ha introducido el número " + string(num_decimal) + ", que es par");}
+//if impar="1" {show_message("Ha introducido el número " + string(num_decimal) + ", que es impar");}
+
+//Funciones		
+//scr_bin_a_decimal() lo he añadido como script, no como función
+function scr_colapsable(num,nones,binary)
+	{
+	if argument0==0 
+		{
+		if string_length(argument2)==1 {return (true);}
+		if string_length(argument2)>1 {return (false);}	
+		}
+	if argument1=="1"
+		{
+		var j=argument0+1;
+		var h=frac(j/4);
+		if h==0 {return (false);}
+		if h!=0 {return (true);}
+		}
+	if argument1=="0"
+		{
+		var j=argument0;
+		var h=frac(j/4);
+		if h==0 {return (false);}
+		if h!=0 {return (true);}
+		}
+	}
+//Programa principal
+	colapsable=scr_colapsable(num_decimal,impar,num_binario);
+	if colapsable==true {show_message("Es colapsable");}
+	if colapsable==false {show_message("No es colapsable");}
+//Testeando la función scr_colapsable
+if debug_mode
+	{
+	var ask=show_question("¿Quieres realizar los test preprogramados?")
+	if ask=1 {event_user(1);}
+	}

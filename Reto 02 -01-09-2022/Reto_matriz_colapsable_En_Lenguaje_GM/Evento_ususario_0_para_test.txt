@@ -1,0 +1,45 @@
+/// @description TESTs
+
+//function scr_colapsable(Numero decimal,par,numero binario)
+//Se inserta librería para test -   https://github.com/dicksonlaw583/gmassert2
+
+function scr_colapso(n)
+	{
+	var a="";
+	a=n;
+	//if 0==real(a) {ceros=true;}
+	var b=0;
+	b=scr_bin_a_decimal(a);
+	var dec=0;
+	dec=b;
+	var non="";
+	non=string_delete(a,1,(string_length(a)-1));
+	var result=scr_colapsable(dec,non,a);
+	if (n=="01") //Caso 01
+		{throw true;}
+	if (n=="00") //Caso 00
+		{throw false;}
+	if (n=="001") //Caso 001
+		{throw false;}
+	if (n=="1001") //Caso 1001
+		{throw true;}
+	if (n=="1110") //Caso 1110
+		{throw true;}
+	if (n=="100") //Caso 100
+		{throw true;}
+	if (n=="11111") //Caso 11111
+		{throw false;}
+	if (n=="0011") //Caso 0011
+		{throw false;}
+	if (n=="0101") //Caso 0101
+		{throw true;}
+	return result;
+	};
+assert_throws([scr_colapso, "01"], true); 
+assert_throws([scr_colapso, "00"], false); 
+assert_throws([scr_colapso, "001"], false); 
+assert_throws([scr_colapso, "1001"], true); 
+assert_throws([scr_colapso, "1110"], true); 
+assert_throws([scr_colapso, "100"], true); 
+assert_throws([scr_colapso, "0011"], false); 
+assert_throws([scr_colapso, "0101"], true); 
