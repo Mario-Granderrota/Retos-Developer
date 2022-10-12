@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Reto_imagen_Digimon/1.0.0": {
+        "runtime": {
+          "Reto_imagen_Digimon.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Reto_imagen_Digimon/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

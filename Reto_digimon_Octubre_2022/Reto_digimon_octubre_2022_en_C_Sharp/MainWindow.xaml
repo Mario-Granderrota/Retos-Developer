@@ -1,0 +1,15 @@
+﻿<Window x:Class="Reto_imagen_Digimon.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Reto_imagen_Digimon"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="Descarga" Content="Descarga de Imagen" HorizontalAlignment="Left" Margin="468,317,0,0" VerticalAlignment="Top" Height="81" Width="296" Click="___Descarga__Click" FontFamily="Verdana" FontSize="20"/>
+        <Image x:Name="Imagen_digimon" Height="204" Margin="468,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296" Source="/muestra.png" AutomationProperties.IsOffscreenBehavior="Offscreen"/>
+        <TextBox x:Name="Caja_texto" HorizontalAlignment="Left" Margin="40,40,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="724" Height="30" TextChanged="Caja_texto_TextChanged"/>
+
+    </Grid>
+</Window>
